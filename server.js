@@ -23,7 +23,7 @@ app.set('view-engine', 'ejs')
 app.use(express.urlencoded({ extended: false }))
 app.use(flash())
 app.use(session({
-  secret: process.env.SESSION_SECRET,
+  secret: process.env.SESSION_SECRET || 'secret',
   resave: false,
   saveUninitialized: false
 }))
@@ -84,4 +84,6 @@ function checkNotAuthenticated(req, res, next) {
   next()
 }
 
-app.listen(3000)
+app.listen(3000, () => {
+  console.log('Listening to port: 3000')
+})
